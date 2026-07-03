@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silva Media · Multimedia Tracker</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#191512; color:#e8e0d8;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; padding:24px;
+  }
+  header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:20px; }
+  h1 { font-size:24px; font-weight:800; letter-spacing:-.3px; }
+  .sub { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; text-transform:uppercase; letter-spacing:1px; margin-top:6px; }
+  .btn {
+    background:#d98e4a; color:#1c1610; border:none; border-radius:10px;
+    font-family:"SF Mono",Menlo,monospace; font-size:12px; font-weight:700;
+    letter-spacing:.5px; padding:10px 18px; cursor:pointer; text-transform:uppercase;
+  }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:20px; }
+  .kpi { background:#221c17; border:1px solid #332a22; border-radius:14px; padding:14px 16px; }
+  .kpi .label { font-family:"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#a89a8c; margin-bottom:8px; }
+  .kpi .val { font-size:28px; font-weight:800; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .chip {
+    font-family:"SF Mono",Menlo,monospace; font-size:11px; letter-spacing:.5px;
+    padding:7px 14px; border-radius:999px; border:1px solid #3a2f25;
+    background:#221c17; color:#c9bcae; cursor:pointer; text-transform:uppercase;
+  }
+  .chip.active { background:#d98e4a; color:#1c1610; border-color:#d98e4a; font-weight:700; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px; }
+  .card { background:#221c17; border:1px solid #332a22; border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px; }
+  .card.stale { outline:1px dashed #6b5335; }
+  .card-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .cname { font-size:16px; font-weight:800; }
+  .chan { font-family:"SF Mono",Menlo,monospace; font-size:10px; color:#8a7c6e; }
+  .pill { font-family:"SF Mono",Menlo,monospace; font-size:10px; font-weight:700; letter-spacing:.5px; padding:5px 10px; border-radius:999px; text-transform:uppercase; white-space:nowrap; }
+  .s-aprobado { background:#1e3524; color:#7fd898; }
+  .s-esperando_cambios { background:#3d2320; color:#f2917e; }
+  .s-esperando_cliente { background:#3b3117; color:#e8c765; }
+  .s-en_produccion { background:#22303d; color:#7fb8e8; }
+  .s-sin_actividad { background:#2b2b2b; color:#9a9a9a; }
+  .sec { font-family:"SF Mono",Menlo,monospace; font-size:9px; letter-spacing:1.2px; text-transform:uppercase; color:#a08a6e; margin-bottom:3px; }
+  .txt { font-size:13px; line-height:1.5; color:#ded4c8; }
+  .blist { list-style:none; }
+  .blist li { font-size:12.5px; line-height:1.45; color:#ded4c8; padding-left:18px; position:relative; margin-bottom:3px; }
+  .blist.done li::before { content:"✓"; position:absolute; left:0; color:#7fd898; font-weight:700; }
+  .blist.todo li::before { content:"○"; position:absolute; left:0; color:#e8c765; font-weight:700; }
+  .meta { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px; border-top:1px solid #2e261e; }
+  .date { font-family:"SF Mono",Menlo,monospace; font-size:10px; color:#8a7c6e; }
+  .warn { color:#f2917e; font-weight:700; }
+  #statusline { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; margin-bottom:14px; min-height:16px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Multimedia Tracker · Clientes Favoritos</h1>
+    <div class="sub" id="subline"></div>
+  </div>
+  <button class="btn" onclick="document.getElementById('statusline').textContent='Esta copia es un snapshot. El tablero dentro de Claude (Cowork) se actualiza solo cada 20 min; pídele a Claude regenerar esta copia cuando quieras datos frescos.'">Cómo actualizar</button>
+</header>
+<div id="statusline"></div>
+<div class="kpis" id="kpis"></div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+
+<script>
+const SNAPSHOT = {
+  generated: "2026-07-03T12:00:00",
+  clients: [
+    {client:"Sylvia Castillo Massingill",channel_name:"sylvia-castillo-massingill-support-channel",last_activity:"2026-07-03",status:"aprobado",ultimo_acuerdo:"02 jul: PDF con guion aprobado + 5 hooks de 1208 Sweden. Sylvia aprobó ('we trust your team's expertise'); el 03 Karlo confirmó 'we're good to go'.",hecho:["Guion + 5 hooks de 1208 Sweden (PDF, 02 jul) — aprobado"],pendiente:["Producir video hero + 5 variaciones","Recibir sus videos de propiedades $400K+ (siguiente ronda)"]},
+    {client:"Ailin Sidney",channel_name:"ailin-sidney-support-channel",last_activity:"2026-07-02",status:"esperando_cliente",ultimo_acuerdo:"02 jul: campaña en producción (hero + 5 hooks, 9801 W Pleasant Valley); se pidió su VoBo para entregar el 03 jul. Cliente frustrada el 01 jul — entrega sensible.",hecho:["Estrategia hero + 5 hooks con sus brutos del 25–26 jun; en producción"],pendiente:["Entregar hero + 5 hooks (prometido 03 jul)","Recibir VoBo de Ailin"]},
+    {client:"Angela y Maria",channel_name:"angela-y-maria-support-channel",last_activity:"2026-07-02",status:"esperando_cambios",ultimo_acuerdo:"02 jul: enviaron 3 videos + guiones propios + referencia y preguntaron si Angela o Mary salen al inicio del video (acordado con Oswaldo).",hecho:["Guiones con 5 hooks enviados (29 jun)","TOP 3 recibido y confirmado (30 jun)"],pendiente:["Reescribir guion: iniciales 3.5–5%, convencional, sin 'cerca de Disney', primer comprador","Revisar sus 3 videos y guiones (02 jul)","Responder si Angela/Mary aparecen al inicio"]},
+    {client:"Eddy Chavarria",channel_name:"eddy-chavarria-support-channel",last_activity:"2026-07-02",status:"en_produccion",ultimo_acuerdo:"02 jul: guion final 'locked' + 5 hooks de 3032 Johnston St (Lincoln Heights); sin feedback requerido. Descartada 4452 Lincoln Ave (PENDING).",hecho:["One-pager con guion final 'locked' + 5 hooks (02 jul)"],pendiente:["Producir el video y lanzar campaña"]},
+    {client:"Elma Vidal",channel_name:"elma-vidal-support-channel",last_activity:"2026-06-29",status:"en_produccion",ultimo_acuerdo:"29 jun: guiones compartidos (completa + 5 hooks), sin aprobación requerida; silencio = luz verde. Sin respuesta de Elma.",hecho:["Guiones completos + 5 hooks enviados (29 jun), luz verde tácita"],pendiente:["Producir los videos","Confirmar que la propiedad siga vigente"]},
+    {client:"Fatima Esquetini",channel_name:"fatima-esquetini-support-channel",last_activity:"2026-06-26",status:"aprobado",ultimo_acuerdo:"26 jun: video del guion aprobado enviado; lanzamiento previsto 'lunes a lo mucho' (29 jun). El 29 la cliente preguntó cuándo empiezan las campañas.",hecho:["Video del guion aprobado entregado (26 jun)"],pendiente:["5 variaciones de hook + lanzamiento — VENCIDO (prometido 29 jun), cliente preguntando"]},
+    {client:"Franklin Maldonado",channel_name:"franklin-maldonado-support-channel",last_activity:"2026-06-29",status:"aprobado",ultimo_acuerdo:"29 jun: guiones entregados por Drive (completa + 5 hooks). Franklin: 'Perfecto gracias'.",hecho:["Guiones completos + 5 hooks por Drive (29 jun)"],pendiente:["Producir los videos"]},
+    {client:"Jeff McDonald",channel_name:"jeff-mcdonald-support-channel",last_activity:"2026-06-30",status:"esperando_cliente",ultimo_acuerdo:"30 jun: guion de Harbor 26 actualizado con su feedback (6 floor plans, high $600s–$1.7M, EV-ready) + 5 hooks; Jeff grabaría los hooks el jueves 02 jul. Habrá versión AI complementaria.",hecho:["Guion Harbor 26 actualizado con su feedback + 5 hooks (30 jun)"],pendiente:["Recibir hooks grabados por Jeff (debía grabar 02 jul)","Producir video + versión AI"]},
+    {client:"Karin Silva",channel_name:"karin-silva-support-channel",last_activity:"2026-07-01",status:"esperando_cliente",ultimo_acuerdo:"01 jul: con el TOP 3 definido, se pidieron imágenes HQ de la propiedad 'unicornio'; se devolverá PDF con guion + hooks para cotejo.",hecho:["PDF de guiones + 5 hooks (29 jun)","TOP 3 definido (01 jul)"],pendiente:["Recibir fotos HQ de la 'unicornio'","Devolver PDF final y producir video (+ video con sus grabaciones reales)"]},
+    {client:"Katy Vilchez",channel_name:"katy-vilchez-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de relanzamiento presentada (1 video + 5 hooks sobre propiedad 'unicornio'); se pidió TOP 3 con links Zillow/MLS ASAP. Sin respuesta.",hecho:["Estrategia de relanzamiento presentada (29 jun)"],pendiente:["Falta su TOP 3 — follow-up recomendado (4d sin respuesta)"]},
+    {client:"Kenny Raymond",channel_name:"kenny-raymond-support-channel",last_activity:"2026-06-30",status:"aprobado",ultimo_acuerdo:"29 jun: guiones entregados por Drive (completa + 5 hooks). Kenny (30 jun): 'ok looks good'.",hecho:["Guiones completos + 5 hooks por Drive (29 jun) — 'ok looks good'"],pendiente:["Producir los videos"]},
+    {client:"Luz Gachupin",channel_name:"luz-gachupin-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de relanzamiento presentada (1 video + 5 hooks, propiedad 'unicornio'); se pidió TOP 3 ASAP. Sin respuesta.",hecho:["Estrategia presentada (29 jun)"],pendiente:["Falta su TOP 3 — follow-up recomendado"]},
+    {client:"Maria Fernanda Corzo",channel_name:"maria-fernanda-corzo-support-channel",last_activity:"2026-06-30",status:"en_produccion",ultimo_acuerdo:"30 jun: a producción con guion aprobado incorporando comentarios. Sesión propuesta para el viernes 03 jul para revisar avances.",hecho:["Guion aprobado con comentarios incorporados; en producción (30 jun)"],pendiente:["Mostrar avances del video (sesión propuesta vie 03 jul)"]},
+    {client:"Video Editing (interno)",channel_name:"new-video-editing-with-karlo",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"28–29 jun: seguimiento a los videos de Ailin; no llegaron y Ailin no está en prioridades según Oswaldo. Pregunta abierta a Oz.",hecho:["Seguimiento hecho; reportado que los videos de Ailin no llegaron (29 jun)"],pendiente:["Definición de Oswaldo sobre cómo continuar"]},
+    {client:"Olga Rios",channel_name:"olga-rios-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de 6 entregables presentada (1 video + 5 hooks, propiedad 'unicornio'); se pidió TOP 3. Sin respuesta.",hecho:["Estrategia de 6 entregables presentada (29 jun)"],pendiente:["Falta su TOP 3 — sin respuesta, follow-up"]},
+    {client:"Orlando y Andres",channel_name:"orlando-y-andres-support-channel",last_activity:"2026-07-01",status:"en_produccion",ultimo_acuerdo:"01 jul: voz en off de Orlando recibida; Andres ofreció su clon de ElevenLabs. Casa confirmada. Orlando viaja 02–17 jul.",hecho:["Guion compartido y casa confirmada (29 jun)","Voz en off de Orlando recibida (01 jul)"],pendiente:["Editar y producir el video (opción clon ElevenLabs de Andres)"]},
+    {client:"Paola Jimenez",channel_name:"paola-jimenez-support-channel",last_activity:"2026-07-02",status:"esperando_cliente",ultimo_acuerdo:"01–02 jul: guion + 5 hooks de Ocala enviados y enfoque aprobado ('Perfect'); se pidieron fotos HQ. Su pregunta '¿solo fotos de casas con terreno?' quedó SIN RESPONDER.",hecho:["Guion + 5 hooks de Ocala enviados; enfoque aprobado (01 jul)"],pendiente:["Responder su pregunta del 02 jul (¿solo fotos con terreno?)","Recibir fotos HQ","Generar el video con IA"]},
+    {client:"Vivian Pascual",channel_name:"vivian-pascual-support-channel",last_activity:"2026-07-01",status:"aprobado",ultimo_acuerdo:"01 jul: variaciones de video listas, ejemplo compartido y visto por Keylen. Material aprobado desde el 26 jun.",hecho:["Material aprobado (26 jun)","Variaciones de video terminadas y ejemplo compartido (01 jul)"],pendiente:["Implementar variaciones en campaña","Confirmar call martes 07 jul (9am o después de 3pm)"]}
+  ]
+};
+
+const STATUS_META = {
+  aprobado:        {label:"Aprobado",          order:2},
+  esperando_cambios:{label:"Esperando cambios", order:0},
+  esperando_cliente:{label:"Esperando cliente", order:1},
+  en_produccion:   {label:"En producción",     order:3},
+  sin_actividad:   {label:"Sin actividad",     order:4}
+};
+
+let state = SNAPSHOT;
+let filter = "todos";
+
+function daysAgo(dateStr){
+  if(!dateStr) return null;
+  return Math.floor((Date.now() - new Date(dateStr+"T12:00:00").getTime()) / 86400000);
+}
+function bullets(arr, cls){
+  if(!arr || !arr.length) return `<div class="txt">—</div>`;
+  return `<ul class="blist ${cls}">` + arr.map(x=>`<li>${x}</li>`).join("") + `</ul>`;
+}
+
+function render(){
+  const d = new Date(state.generated);
+  document.getElementById("subline").textContent = state.clients.length + " clientes · snapshot del " + d.toLocaleString("es-MX",{dateStyle:"medium",timeStyle:"short"});
+
+  const counts = {};
+  state.clients.forEach(c => counts[c.status] = (counts[c.status]||0)+1);
+  document.getElementById("kpis").innerHTML = Object.keys(STATUS_META).map(k =>
+    `<div class="kpi"><div class="label">${STATUS_META[k].label}</div><div class="val">${counts[k]||0}</div></div>`
+  ).join("");
+
+  const filts = ["todos", ...Object.keys(STATUS_META)];
+  document.getElementById("filters").innerHTML = filts.map(f =>
+    `<button class="chip ${filter===f?'active':''}" onclick="setFilter('${f}')">${f==='todos'?'Todos':STATUS_META[f].label}</button>`
+  ).join("");
+
+  const list = state.clients
+    .filter(c => filter==="todos" || c.status===filter)
+    .slice()
+    .sort((a,b) => (STATUS_META[a.status]?.order??9) - (STATUS_META[b.status]?.order??9) || String(b.last_activity||"").localeCompare(String(a.last_activity||"")));
+
+  document.getElementById("grid").innerHTML = list.map(c => {
+    const dago = daysAgo(c.last_activity);
+    const staleTxt = dago===null ? "sin actividad" : (dago===0 ? "hoy" : dago+"d sin actividad");
+    const stale = dago!==null && dago>=4;
+    return `<div class="card ${stale?'stale':''}">
+      <div class="card-top">
+        <div><div class="cname">${c.client}</div><div class="chan">#${c.channel_name}</div></div>
+        <span class="pill s-${c.status}">${STATUS_META[c.status]?.label || c.status}</span>
+      </div>
+      <div><div class="sec">Último acuerdo</div><div class="txt">${c.ultimo_acuerdo||"—"}</div></div>
+      <div><div class="sec">Hecho</div>${bullets(c.hecho,"done")}</div>
+      <div><div class="sec">Por entregar</div>${bullets(c.pendiente,"todo")}</div>
+      <div class="meta">
+        <span class="date ${stale?'warn':''}">${staleTxt}</span>
+        <span class="date">${c.last_activity||""}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+function setFilter(f){ filter=f; render(); }
+render();
+</script>
+</body>
+</html>
