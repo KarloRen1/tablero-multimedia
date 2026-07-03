@@ -70,26 +70,290 @@
 
 <script>
 const SNAPSHOT = {
-  generated: "2026-07-03T12:00:00",
-  clients: [
-    {client:"Sylvia Castillo Massingill",channel_name:"sylvia-castillo-massingill-support-channel",last_activity:"2026-07-03",status:"aprobado",ultimo_acuerdo:"02 jul: PDF con guion aprobado + 5 hooks de 1208 Sweden. Sylvia aprobó ('we trust your team's expertise'); el 03 Karlo confirmó 'we're good to go'.",hecho:["Guion + 5 hooks de 1208 Sweden (PDF, 02 jul) — aprobado"],pendiente:["Producir video hero + 5 variaciones","Recibir sus videos de propiedades $400K+ (siguiente ronda)"]},
-    {client:"Ailin Sidney",channel_name:"ailin-sidney-support-channel",last_activity:"2026-07-02",status:"esperando_cliente",ultimo_acuerdo:"02 jul: campaña en producción (hero + 5 hooks, 9801 W Pleasant Valley); se pidió su VoBo para entregar el 03 jul. Cliente frustrada el 01 jul — entrega sensible.",hecho:["Estrategia hero + 5 hooks con sus brutos del 25–26 jun; en producción"],pendiente:["Entregar hero + 5 hooks (prometido 03 jul)","Recibir VoBo de Ailin"]},
-    {client:"Angela y Maria",channel_name:"angela-y-maria-support-channel",last_activity:"2026-07-02",status:"esperando_cambios",ultimo_acuerdo:"02 jul: enviaron 3 videos + guiones propios + referencia y preguntaron si Angela o Mary salen al inicio del video (acordado con Oswaldo).",hecho:["Guiones con 5 hooks enviados (29 jun)","TOP 3 recibido y confirmado (30 jun)"],pendiente:["Reescribir guion: iniciales 3.5–5%, convencional, sin 'cerca de Disney', primer comprador","Revisar sus 3 videos y guiones (02 jul)","Responder si Angela/Mary aparecen al inicio"]},
-    {client:"Eddy Chavarria",channel_name:"eddy-chavarria-support-channel",last_activity:"2026-07-02",status:"en_produccion",ultimo_acuerdo:"02 jul: guion final 'locked' + 5 hooks de 3032 Johnston St (Lincoln Heights); sin feedback requerido. Descartada 4452 Lincoln Ave (PENDING).",hecho:["One-pager con guion final 'locked' + 5 hooks (02 jul)"],pendiente:["Producir el video y lanzar campaña"]},
-    {client:"Elma Vidal",channel_name:"elma-vidal-support-channel",last_activity:"2026-06-29",status:"en_produccion",ultimo_acuerdo:"29 jun: guiones compartidos (completa + 5 hooks), sin aprobación requerida; silencio = luz verde. Sin respuesta de Elma.",hecho:["Guiones completos + 5 hooks enviados (29 jun), luz verde tácita"],pendiente:["Producir los videos","Confirmar que la propiedad siga vigente"]},
-    {client:"Fatima Esquetini",channel_name:"fatima-esquetini-support-channel",last_activity:"2026-06-26",status:"aprobado",ultimo_acuerdo:"26 jun: video del guion aprobado enviado; lanzamiento previsto 'lunes a lo mucho' (29 jun). El 29 la cliente preguntó cuándo empiezan las campañas.",hecho:["Video del guion aprobado entregado (26 jun)"],pendiente:["5 variaciones de hook + lanzamiento — VENCIDO (prometido 29 jun), cliente preguntando"]},
-    {client:"Franklin Maldonado",channel_name:"franklin-maldonado-support-channel",last_activity:"2026-06-29",status:"aprobado",ultimo_acuerdo:"29 jun: guiones entregados por Drive (completa + 5 hooks). Franklin: 'Perfecto gracias'.",hecho:["Guiones completos + 5 hooks por Drive (29 jun)"],pendiente:["Producir los videos"]},
-    {client:"Jeff McDonald",channel_name:"jeff-mcdonald-support-channel",last_activity:"2026-06-30",status:"esperando_cliente",ultimo_acuerdo:"30 jun: guion de Harbor 26 actualizado con su feedback (6 floor plans, high $600s–$1.7M, EV-ready) + 5 hooks; Jeff grabaría los hooks el jueves 02 jul. Habrá versión AI complementaria.",hecho:["Guion Harbor 26 actualizado con su feedback + 5 hooks (30 jun)"],pendiente:["Recibir hooks grabados por Jeff (debía grabar 02 jul)","Producir video + versión AI"]},
-    {client:"Karin Silva",channel_name:"karin-silva-support-channel",last_activity:"2026-07-01",status:"esperando_cliente",ultimo_acuerdo:"01 jul: con el TOP 3 definido, se pidieron imágenes HQ de la propiedad 'unicornio'; se devolverá PDF con guion + hooks para cotejo.",hecho:["PDF de guiones + 5 hooks (29 jun)","TOP 3 definido (01 jul)"],pendiente:["Recibir fotos HQ de la 'unicornio'","Devolver PDF final y producir video (+ video con sus grabaciones reales)"]},
-    {client:"Katy Vilchez",channel_name:"katy-vilchez-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de relanzamiento presentada (1 video + 5 hooks sobre propiedad 'unicornio'); se pidió TOP 3 con links Zillow/MLS ASAP. Sin respuesta.",hecho:["Estrategia de relanzamiento presentada (29 jun)"],pendiente:["Falta su TOP 3 — follow-up recomendado (4d sin respuesta)"]},
-    {client:"Kenny Raymond",channel_name:"kenny-raymond-support-channel",last_activity:"2026-06-30",status:"aprobado",ultimo_acuerdo:"29 jun: guiones entregados por Drive (completa + 5 hooks). Kenny (30 jun): 'ok looks good'.",hecho:["Guiones completos + 5 hooks por Drive (29 jun) — 'ok looks good'"],pendiente:["Producir los videos"]},
-    {client:"Luz Gachupin",channel_name:"luz-gachupin-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de relanzamiento presentada (1 video + 5 hooks, propiedad 'unicornio'); se pidió TOP 3 ASAP. Sin respuesta.",hecho:["Estrategia presentada (29 jun)"],pendiente:["Falta su TOP 3 — follow-up recomendado"]},
-    {client:"Maria Fernanda Corzo",channel_name:"maria-fernanda-corzo-support-channel",last_activity:"2026-06-30",status:"en_produccion",ultimo_acuerdo:"30 jun: a producción con guion aprobado incorporando comentarios. Sesión propuesta para el viernes 03 jul para revisar avances.",hecho:["Guion aprobado con comentarios incorporados; en producción (30 jun)"],pendiente:["Mostrar avances del video (sesión propuesta vie 03 jul)"]},
-    {client:"Video Editing (interno)",channel_name:"new-video-editing-with-karlo",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"28–29 jun: seguimiento a los videos de Ailin; no llegaron y Ailin no está en prioridades según Oswaldo. Pregunta abierta a Oz.",hecho:["Seguimiento hecho; reportado que los videos de Ailin no llegaron (29 jun)"],pendiente:["Definición de Oswaldo sobre cómo continuar"]},
-    {client:"Olga Rios",channel_name:"olga-rios-support-channel",last_activity:"2026-06-29",status:"esperando_cliente",ultimo_acuerdo:"29 jun: estrategia de 6 entregables presentada (1 video + 5 hooks, propiedad 'unicornio'); se pidió TOP 3. Sin respuesta.",hecho:["Estrategia de 6 entregables presentada (29 jun)"],pendiente:["Falta su TOP 3 — sin respuesta, follow-up"]},
-    {client:"Orlando y Andres",channel_name:"orlando-y-andres-support-channel",last_activity:"2026-07-01",status:"en_produccion",ultimo_acuerdo:"01 jul: voz en off de Orlando recibida; Andres ofreció su clon de ElevenLabs. Casa confirmada. Orlando viaja 02–17 jul.",hecho:["Guion compartido y casa confirmada (29 jun)","Voz en off de Orlando recibida (01 jul)"],pendiente:["Editar y producir el video (opción clon ElevenLabs de Andres)"]},
-    {client:"Paola Jimenez",channel_name:"paola-jimenez-support-channel",last_activity:"2026-07-02",status:"esperando_cliente",ultimo_acuerdo:"01–02 jul: guion + 5 hooks de Ocala enviados y enfoque aprobado ('Perfect'); se pidieron fotos HQ. Su pregunta '¿solo fotos de casas con terreno?' quedó SIN RESPONDER.",hecho:["Guion + 5 hooks de Ocala enviados; enfoque aprobado (01 jul)"],pendiente:["Responder su pregunta del 02 jul (¿solo fotos con terreno?)","Recibir fotos HQ","Generar el video con IA"]},
-    {client:"Vivian Pascual",channel_name:"vivian-pascual-support-channel",last_activity:"2026-07-01",status:"aprobado",ultimo_acuerdo:"01 jul: variaciones de video listas, ejemplo compartido y visto por Keylen. Material aprobado desde el 26 jun.",hecho:["Material aprobado (26 jun)","Variaciones de video terminadas y ejemplo compartido (01 jul)"],pendiente:["Implementar variaciones en campaña","Confirmar call martes 07 jul (9am o después de 3pm)"]}
+  "generated": "2026-07-03T18:07:20.947917+00:00",
+  "clients": [
+    {
+      "client": "Sylvia Castillo Massingill",
+      "channel_name": "sylvia-castillo-massingill-support-channel",
+      "last_activity": "2026-07-03",
+      "status": "en_produccion",
+      "ultimo_acuerdo": "El 2026-07-02 Karlo envió el PDF con el guion aprobado + 5 variaciones de hook para 1208 Sweden (presupuesto anclado en $350K-$450K); Sylvia dio el go-ahead el 07-02 ('we trust your team') y lo reconfirmó el 07-03 con un 'Yes', así que el video hero entra a producción.",
+      "hecho": [
+        "Definida la estrategia creativa de 6 entregables: 1 video hero + 5 variaciones de hook alrededor de una propiedad 'unicornio' (2026-06-30)",
+        "Elegida 1208 Sweden (2 pisos) como propiedad hero tras el ranking de James y el contexto de precios de Sylvia (2026-07-02)",
+        "Entregado el PDF con el guion aprobado + 5 hooks para 1208 Sweden vía Drive (2026-07-02)",
+        "Recibidos del cliente: videos en bruto de 3 casas con datos de precio/financiamiento (2026-06-26) y links MLS de las 3 propiedades en Sweden (2026-06-29)"
+      ],
+      "pendiente": [
+        "Producir el video hero + 5 variaciones de hook de 1208 Sweden (aprobación recibida 2026-07-03)",
+        "Sylvia enviará videos de propiedades en otras áreas sobre $400K para la siguiente ronda (flagship premium)"
+      ]
+    },
+    {
+      "client": "Ailin Sidney",
+      "channel_name": "ailin-sidney-support-channel",
+      "last_activity": "2026-07-02",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-07-02 Karlo informó que la campaña de video hero + 5 hooks sobre 9801 W Pleasant Valley ya está en producción con los videos en bruto de Ailin, y le pidió su VoBo para entregarle 'mañana mismo' (2026-07-03); sin respuesta de Ailin aún.",
+      "hecho": [
+        "Recibidos los videos en bruto de 9801 W Pleasant Valley que Ailin envió sin editar (confirmado 2026-06-26)",
+        "Seleccionada 9801 W Pleasant Valley como la mejor propiedad para la campaña (Diana pidió confirmar entre esa y 3446 E Knoll el 2026-07-01)",
+        "Campaña video hero + 5 hooks en producción; Karlo compartió actualización de avance el 2026-07-02"
+      ],
+      "pendiente": [
+        "VoBo de Ailin para entregar el material (pedido el 2026-07-02, sin respuesta en el canal)",
+        "Entrega final del video hero + hooks prometida para el 2026-07-03 tras el VoBo"
+      ]
+    },
+    {
+      "client": "Angela y Maria",
+      "channel_name": "angela-y-maria-support-channel",
+      "last_activity": "2026-07-02",
+      "status": "esperando_cambios",
+      "ultimo_acuerdo": "El 2026-07-02 Karlo dijo 'solo necesito esto y arrancamos con la producción'; Angela respondió el mismo día que enviaron links de 3 videos, guiones previos (dolor del primer comprador, casa residencial y casa con anexo) y un video de referencia, y pidieron confirmar si Angela/Mary aparecerán al inicio del video con un speech, como acordaron con Oswaldo.",
+      "hecho": [
+        "Entregados los guiones de campaña con versión completa + 5 variaciones de hook vía Drive (2026-06-29)",
+        "Confirmado de recibido el TOP 3 de propiedades para trabajar la 'unicornio' (2026-06-30)",
+        "Recibidos del cliente: links de 3 videos, guiones previos sobre el dolor del primer comprador y un video de referencia con áreas e incentivos (2026-07-02)"
+      ],
+      "pendiente": [
+        "Ajustar guiones según feedback de Angela (2026-06-29): inicial 3.5-5% en vez de 10%, préstamo convencional en vez de VA, corregir áreas no cercanas a Disney, quitar hook de inversionistas (target es primer comprador), tocar el dolor",
+        "Responder si Angela/Mary grabarán un speech y aparecerán al inicio del video (acuerdo previo con Oswaldo, repreguntado 2026-07-02)",
+        "Revisar los 3 videos y el video de referencia que enviaron el 2026-07-02",
+        "Arrancar producción del video (bloqueada hasta resolver lo anterior)"
+      ]
+    },
+    {
+      "client": "Eddy Chavarria",
+      "channel_name": "eddy-chavarria-support-channel",
+      "last_activity": "2026-07-02",
+      "status": "en_produccion",
+      "ultimo_acuerdo": "El 2026-07-02 Yao confirmó 3032 Johnston St como la mejor propiedad activa y Karlo entregó el one-pager con el guion final bloqueado + 5 hooks (skyline, upsizers, inversionistas, renters, familias multigeneracionales); sin feedback requerido, pasan directo a producir el video y lanzar la campaña.",
+      "hecho": [
+        "Entregado guion + 5 hooks del duplex 4452 Lincoln Ave (Eagle Rock) como propiedad de referencia, flaggeando que estaba PENDING (2026-06-30)",
+        "Pivote a 3032 Johnston St (Lincoln Heights), listing activo de David De Anda confirmado por Yao como el mejor (2026-07-02)",
+        "Entregado el one-pager con guion final aprobado + 5 variaciones de hook para 3032 Johnston St vía Drive (2026-07-02)",
+        "Recibidos del cliente: logos, links de Zillow de 3032 Johnston St y 906 Lemon Dr (2026-07-02)"
+      ],
+      "pendiente": [
+        "Producir el video de 3032 Johnston St y poner la campaña en vivo (guion bloqueado desde 2026-07-02)"
+      ]
+    },
+    {
+      "client": "Elma Vidal",
+      "channel_name": "elma-vidal-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "en_produccion",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo entregó los guiones (versión completa + 5 variaciones de hook) vía Drive, aclarando que no requieren aprobación, solo que la propiedad siga vigente; el silencio de Elma cuenta como luz verde y el equipo sigue avanzando. Sin respuesta de Elma en el canal desde entonces.",
+      "hecho": [
+        "Entregados los guiones de campaña con versión completa + 5 variaciones de hook vía Drive (2026-06-29)"
+      ],
+      "pendiente": [
+        "Producir los videos a partir de los guiones entregados",
+        "Confirmación (opcional) de Elma de que la propiedad sigue vigente; no ha respondido desde el 2026-06-29"
+      ]
+    },
+    {
+      "client": "Fatima Esquetini",
+      "channel_name": "fatima-esquetini-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "aprobado",
+      "ultimo_acuerdo": "El 2026-06-26 Karlo envió el video del guion aprobado con una variante y quedó en preparar el lanzamiento para el lunes 06-29 a más tardar con las variaciones de hook; Fatima dio el visto ('Listo!! Esperemos excelentes resultados'). El 06-29 Fatima preguntó cuándo empiezan las campañas y Karlo derivó el seguimiento a Mavi.",
+      "hecho": [
+        "Entregado el video del guion aprobado con una de sus variantes para revisión de Fatima (2026-06-26)",
+        "Completados ese día los videos correspondientes al guion; plan de 5 variaciones de hook adicionales para la campaña (2026-06-26)"
+      ],
+      "pendiente": [
+        "Confirmar a Fatima el arranque de la campaña con los videos (preguntó el 2026-06-29 y quedó en seguimiento con Mavi; el lanzamiento estaba previsto para el lunes 06-29)"
+      ]
+    },
+    {
+      "client": "Franklin Maldonado",
+      "channel_name": "franklin-maldonado-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "aprobado",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo envió los guiones de campaña (versión completa + 5 variaciones de hook) indicando que no requieren aprobación para avanzar; Franklin respondió 'Perfecto gracias' el mismo día, quedando luz verde para producir.",
+      "hecho": [
+        "Guiones de campaña entregados vía Google Drive (versión completa + 5 variaciones de hook) el 2026-06-29",
+        "Cliente acusó recibo con visto bueno ('Perfecto gracias') el 2026-06-29"
+      ],
+      "pendiente": [
+        "Producir los videos basados en los guiones enviados (equipo avanza sin necesitar aprobación adicional)"
+      ]
+    },
+    {
+      "client": "Jeff McDonald",
+      "channel_name": "jeff-mcdonald-support-channel",
+      "last_activity": "2026-06-30",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-06-30 Karlo entregó el guión actualizado de la campaña Harbor 26 (enfocado en la comunidad de 6 floor plans, precios high $600s-$1.7M, EV-ready, cuerpo aprobado + 5 hooks) y quedó acordado que Jeff graba los hooks el jueves 2026-07-02; además el equipo producirá una versión adicional generada con IA.",
+      "hecho": [
+        "Guiones iniciales de campaña enviados (versión completa + 5 hooks) el 2026-06-29",
+        "Incorporado el feedback de la llamada Jeff/Oswaldo/Diana del 2026-06-30 (reencuadre a comunidad completa, 6 floor plans, rango de precios real, qualifier 'move-in ready', EV-ready parking)",
+        "Guión actualizado de Harbor 26 entregado el 2026-06-30 con cuerpo aprobado + 5 variaciones de hook",
+        "Confirmado con Jeff el favorite floorplan (Unit 5 - 2012 Fairview Ave, ~$1.06M) el 2026-06-30"
+      ],
+      "pendiente": [
+        "Jeff debe grabar los hooks (acordado para el jueves 2026-07-02) y enviar los videos",
+        "Equipo debe producir la versión AI-generated complementaria de la campaña"
+      ]
+    },
+    {
+      "client": "Karin Silva",
+      "channel_name": "karin-silva-support-channel",
+      "last_activity": "2026-07-01",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-07-01 Karlo le pidió a Karin las imágenes en alta calidad de su propiedad 'unicornio' (la #2 de su TOP 3 definido el 2026-06-25) y quedó en devolverle un PDF con el guión y sus variantes de hook, aclarando que no requiere aprobación, solo cotejo de información.",
+      "hecho": [
+        "Guiones de campaña entregados vía Google Drive (versión completa + 5 variaciones de hook) el 2026-06-29",
+        "Aclarado al cliente que el primer video se produce con imágenes del listing + IA, distinto del video con material real del listing (2026-06-29)",
+        "Recibido del equipo de Karin (Mavi) un video existente de su listing el 2026-06-29",
+        "Solicitud formal de imágenes en alta calidad de la propiedad unicornio enviada el 2026-07-01"
+      ],
+      "pendiente": [
+        "Karin debe enviar las imágenes en alta calidad de la propiedad unicornio (la #2 de su TOP 3)",
+        "Equipo debe enviarle el PDF con el guión y sus variantes de hook para cotejo de información"
+      ]
+    },
+    {
+      "client": "Katy Vilchez",
+      "channel_name": "katy-vilchez-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo presentó la estrategia de 6 entregables (1 video original + 5 variaciones de hook sobre una propiedad 'unicornio') y pidió a Katy su TOP 3 de propiedades ASAP (links de Zillow/MLS o dirección + precio + fotos); sin respuesta del cliente hasta la fecha.",
+      "hecho": [
+        "Estrategia creativa de 6 entregables presentada al cliente el 2026-06-29",
+        "Solicitud del TOP 3 de propiedades (unicornio, segunda fuerte, opción accesible) enviada el 2026-06-29"
+      ],
+      "pendiente": [
+        "Katy debe enviar su TOP 3 de propiedades (links o dirección + precio + fotos) para arrancar producción",
+        "Producir el video original + 5 variaciones de hook una vez recibida la propiedad unicornio"
+      ]
+    },
+    {
+      "client": "Kenny Raymond",
+      "channel_name": "kenny-raymond-support-channel",
+      "last_activity": "2026-06-30",
+      "status": "aprobado",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo envió los guiones de campaña (versión completa + 5 variaciones de hook) sin requerir aprobación para avanzar; Kenny respondió 'ok looks good' el 2026-06-30, dando luz verde.",
+      "hecho": [
+        "Guiones de campaña entregados vía Google Drive (versión completa + 5 variaciones de hook) el 2026-06-29",
+        "Visto bueno del cliente recibido ('ok looks good') el 2026-06-30"
+      ],
+      "pendiente": [
+        "Producir los videos basados en los guiones aprobados"
+      ]
+    },
+    {
+      "client": "Luz Gachupin",
+      "channel_name": "luz-gachupin-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo presentó la estrategia de 6 entregables (1 video original + 5 variaciones de hook sobre una propiedad 'unicornio') y pidió a Luz su TOP 3 de propiedades ASAP (links de Zillow/MLS o dirección + precio + fotos); sin respuesta del cliente hasta la fecha.",
+      "hecho": [
+        "Estrategia creativa de 6 entregables presentada al cliente el 2026-06-29",
+        "Solicitud del TOP 3 de propiedades (unicornio, segunda fuerte, opción accesible) enviada el 2026-06-29"
+      ],
+      "pendiente": [
+        "Luz debe enviar su TOP 3 de propiedades (links o dirección + precio + fotos) para arrancar producción",
+        "Producir el video original + 5 variaciones de hook una vez recibida la propiedad unicornio"
+      ]
+    },
+    {
+      "client": "Maria Fernanda Corzo",
+      "channel_name": "maria-fernanda-corzo-support-channel",
+      "last_activity": "2026-06-30",
+      "status": "en_produccion",
+      "ultimo_acuerdo": "El 2026-06-30 Karlo confirmó que avanzan a producción con los comentarios recibidos y el guión aprobado; Diana propuso agendar sesión el viernes para revisar avances.",
+      "hecho": [
+        "Guión aprobado e incorporación de los comentarios de la cliente (confirmado 2026-06-30)",
+        "Seguimiento de Diana (2026-06-29 y 2026-06-30) para destrabar los comentarios pendientes de la cliente"
+      ],
+      "pendiente": [
+        "Producir el video con base en el guión aprobado",
+        "Sesión del viernes propuesta por Diana para mostrar avances"
+      ]
+    },
+    {
+      "client": "Video Editing (interno)",
+      "channel_name": "new-video-editing-with-karlo",
+      "last_activity": "2026-06-29",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo confirmó que no recibió los videos de Ailin y que esa cliente no está en prioridades según Oz; quedó abierta la pregunta a Oz sobre cómo continuar con ella.",
+      "hecho": [
+        "Karlo revisó y respondió el seguimiento de Dugmary sobre los videos de Ailin (2026-06-29)"
+      ],
+      "pendiente": [
+        "Recibir los videos de Ailin (ella dice que ya los envió pero no llegaron a Karlo)",
+        "Definición de Oz sobre cómo continuar con la cliente Ailin"
+      ]
+    },
+    {
+      "client": "Olga Rios",
+      "channel_name": "olga-rios-support-channel",
+      "last_activity": "2026-06-29",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo le pidió a Olga sus TOP 3 propiedades (unicornio, segunda fuerte y una modesta) ASAP para construir la campaña de 6 entregables (1 video original + 5 variaciones de hook). Sin respuesta de la cliente.",
+      "hecho": [
+        "Presentación de la estrategia creativa de 6 entregables (video base + 5 hooks) y solicitud de TOP 3 propiedades (2026-06-29)"
+      ],
+      "pendiente": [
+        "Recibir de Olga los links/datos de sus TOP 3 propiedades, empezando por la 'unicornio'",
+        "Iniciar producción del video base una vez recibidas las propiedades"
+      ]
+    },
+    {
+      "client": "Orlando y Andres",
+      "channel_name": "orlando-y-andres-support-channel",
+      "last_activity": "2026-07-01",
+      "status": "en_produccion",
+      "ultimo_acuerdo": "El 2026-06-29 Karlo compartió el guión (Drive) y pidió voz en off completa de cada uno para versión con IA; se acordó ir con la casa que Orlando envió (no la de 15183 Bridgewater). El 2026-07-01 Karlo confirmó recibida la grabación de Orlando. Urgencia: Orlando viaja el jueves 2026-07-03 y está fuera hasta el 17 de julio.",
+      "hecho": [
+        "Guión del video compartido vía Drive (2026-06-29)",
+        "Propiedad/comunidad definida: la casa enviada por Orlando + info de Lake Star at Ovation (Winter Garden) para el ad (2026-06-29)",
+        "Grabación de voz de Orlando recibida y confirmada por Karlo (2026-07-01)",
+        "Acordado que Andres aporta su clon de voz de ElevenLabs para la versión de voz en off (2026-06-30)"
+      ],
+      "pendiente": [
+        "Recibir el archivo del clon de voz de ElevenLabs de Andres (Karlo le pidió descargarlo y enviarlo por Slack)",
+        "Producir el video/ad con el switching de voces y las versiones con IA",
+        "Entregar el video para publicación (Orlando pedía tenerlo antes de su viaje del 2026-07-03; salió de la ventana con las ads en pausa)"
+      ]
+    },
+    {
+      "client": "Paola Jimenez",
+      "channel_name": "paola-jimenez-support-channel",
+      "last_activity": "2026-07-02",
+      "status": "esperando_cliente",
+      "ultimo_acuerdo": "El 2026-07-01 Paola aprobó el re-enfoque del guión de Ocala ('Perfect') y Karlo envió el guión con 5 hooks; el 2026-07-02 Karlo aclaró que el video se genera con IA y solo necesita fotos de alta calidad de la propiedad. Última pregunta de Paola ('¿solo necesitas fotos de casas con terreno?', 2026-07-02) sin respuesta del equipo.",
+      "hecho": [
+        "Re-enfoque estratégico del guión de Ocala presentado y aprobado por la cliente (2026-07-01)",
+        "Guión de campaña + 5 hooks entregados vía Drive (2026-07-01)",
+        "Aclaración a la cliente: video generado con IA, no necesita grabar; TOP 3 propiedades solo como referencia, se usa la 'unicornio' (2026-07-02)",
+        "Recomendación de mantener corriendo el video de Ocala (mejor campaña) en vez de pausarlo (2026-06-28)"
+      ],
+      "pendiente": [
+        "Responder la última pregunta de Paola sobre si solo se necesitan fotos de casas con terreno (2026-07-02)",
+        "Recibir de Paola fotografías de alta calidad de la propiedad para generar el video con IA",
+        "La llamada que Paola pidió ('regálame una llamadita') para aclarar dudas del proceso",
+        "Producir el video con IA una vez recibidas las fotos"
+      ]
+    },
+    {
+      "client": "Vivian Pascual",
+      "channel_name": "vivian-pascual-support-channel",
+      "last_activity": "2026-07-01",
+      "status": "aprobado",
+      "ultimo_acuerdo": "El 2026-06-26 Keylen confirmó el documento aprobado ('Todo lo demás aprobado') y el 2026-07-01 Karlo entregó las variaciones de video listas con un ejemplo, indicando que no se requieren comentarios; Keylen confirmó que las vio.",
+      "hecho": [
+        "Variaciones de video de la campaña terminadas y compartido un ejemplo en el canal (2026-07-01)",
+        "Documento base aprobado por el lado de la cliente vía Keylen (2026-06-26)",
+        "Confirmación de recepción/visualización por Keylen (2026-07-01)"
+      ],
+      "pendiente": [
+        "Implementar las variaciones de video en la campaña"
+      ]
+    }
   ]
 };
 
