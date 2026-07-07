@@ -56,6 +56,10 @@
   .csr-diana { background:#332440; color:#c9a1f0; }
   .csr-mavi  { background:#173b33; color:#6fd8b8; }
   .csr-none  { background:#2b2b2b; color:#9a9a9a; }
+  .abtn { font-family:"SF Mono",Menlo,monospace; font-size:11px; font-weight:800; letter-spacing:.8px; padding:8px 14px; border:none; border-radius:8px; text-transform:uppercase; cursor:default; width:100%; }
+  .a-arrancate { background:#e8c765; color:#1c1610; }
+  .a-entregado { background:#7fd898; color:#0f2416; }
+  .a-faltatop3 { background:#f2917e; color:#2a120d; }
   #statusline { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; margin-bottom:14px; min-height:16px; }
 </style>
 </head>
@@ -357,6 +361,29 @@ const CSR_MAP = {
 };
 const csrOf = c => c.csr || CSR_MAP[c.client] || "\u2014";
 
+// Botón de etapa por cliente. Vive FUERA de SNAPSHOT para sobrevivir a las actualizaciones automaticas.
+// arrancate = PDF GOAT entregado, arranca la edición · entregado = edición/video ya entregado · faltatop3 = cliente no ha mandado su TOP 3
+const ETAPA_MAP = {
+  "Sylvia Castillo Massingill": "arrancate",
+  "Angela y Maria": "arrancate",
+  "Eddy Chavarria": "arrancate",
+  "Jeff McDonald": "arrancate",
+  "Maria Fernanda Corzo": "arrancate",
+  "Orlando y Andres": "arrancate",
+  "Ailin Sidney": "entregado",
+  "Kenny Raymond": "entregado",
+  "Paola Jimenez": "entregado",
+  "Vivian Pascual": "entregado",
+  "Katy Vilchez": "faltatop3",
+  "Luz Gachupin": "faltatop3",
+  "Olga Rios": "faltatop3"
+};
+const ETAPA_LABEL = { arrancate:"ARR\u00c1NCATE", entregado:"ya se entreg\u00f3", faltatop3:"falta top 3" };
+const etapaBtn = c => {
+  const e = ETAPA_MAP[c.client];
+  return e ? `<button class="abtn a-${e}">${ETAPA_LABEL[e]}</button>` : "";
+};
+
 const STATUS_META = {
   aprobado:        {label:"Aprobado",          order:2},
   esperando_cambios:{label:"Esperando cambios", order:0},
@@ -412,6 +439,7 @@ function render(){
           <span class="csrpill csr-${csrOf(c)==='Diana'?'diana':csrOf(c)==='Mavi'?'mavi':'none'}">CSR \u00b7 ${csrOf(c)}</span>
         </div>
       </div>
+      ${etapaBtn(c)}
       <div><div class="sec">Último acuerdo</div><div class="txt">${c.ultimo_acuerdo||"—"}</div></div>
       <div><div class="sec">Hecho</div>${bullets(c.hecho,"done")}</div>
       <div><div class="sec">Por entregar</div>${bullets(c.pendiente,"todo")}</div>
