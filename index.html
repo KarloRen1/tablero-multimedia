@@ -52,6 +52,10 @@
   .meta { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px; border-top:1px solid #2e261e; }
   .date { font-family:"SF Mono",Menlo,monospace; font-size:10px; color:#8a7c6e; }
   .warn { color:#f2917e; font-weight:700; }
+  .csrpill { font-family:"SF Mono",Menlo,monospace; font-size:10px; font-weight:700; letter-spacing:.5px; padding:4px 10px; border-radius:999px; text-transform:uppercase; white-space:nowrap; }
+  .csr-diana { background:#332440; color:#c9a1f0; }
+  .csr-mavi  { background:#173b33; color:#6fd8b8; }
+  .csr-none  { background:#2b2b2b; color:#9a9a9a; }
   #statusline { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; margin-bottom:14px; min-height:16px; }
 </style>
 </head>
@@ -309,6 +313,29 @@ const SNAPSHOT = {
   ]
 };
 
+// CSR asignada por cliente. Vive FUERA de SNAPSHOT para sobrevivir a las actualizaciones automaticas.
+const CSR_MAP = {
+  "Sylvia Castillo Massingill": "Mavi",
+  "Ailin Sidney": "Diana",
+  "Angela y Maria": "Mavi",
+  "Eddy Chavarria": "Diana",
+  "Elma Vidal": "Mavi",
+  "Fatima Esquetini": "Mavi",
+  "Franklin Maldonado": "Diana",
+  "Jeff McDonald": "Diana",
+  "Karin Silva": "Mavi",
+  "Katy Vilchez": "Mavi",
+  "Kenny Raymond": "Diana",
+  "Luz Gachupin": "Mavi",
+  "Maria Fernanda Corzo": "Diana",
+  "Video Editing (interno)": "Interno",
+  "Olga Rios": "Mavi",
+  "Orlando y Andres": "Mavi",
+  "Paola Jimenez": "Diana",
+  "Vivian Pascual": "Mavi"
+};
+const csrOf = c => c.csr || CSR_MAP[c.client] || "\u2014";
+
 const STATUS_META = {
   aprobado:        {label:"Aprobado",          order:2},
   esperando_cambios:{label:"Esperando cambios", order:0},
@@ -319,6 +346,7 @@ const STATUS_META = {
 
 let state = SNAPSHOT;
 let filter = "todos";
+let csrFilter = "todas";
 
 function daysAgo(dateStr){
   if(!dateStr) return null;
@@ -342,10 +370,12 @@ function render(){
   const filts = ["todos", ...Object.keys(STATUS_META)];
   document.getElementById("filters").innerHTML = filts.map(f =>
     `<button class="chip ${filter===f?'active':''}" onclick="setFilter('${f}')">${f==='todos'?'Todos':STATUS_META[f].label}</button>`
+  ).join("") + `<span style="width:1px;background:#3a2f25;margin:0 4px"></span>` + ["todas","Diana","Mavi"].map(f =>
+    `<button class="chip ${csrFilter===f?'active':''}" onclick="setCsrFilter('${f}')">${f==='todas'?'CSR: Todas':f}</button>`
   ).join("");
 
   const list = state.clients
-    .filter(c => filter==="todos" || c.status===filter)
+    .filter(c => (filter==="todos" || c.status===filter) && (csrFilter==="todas" || csrOf(c)===csrFilter))
     .slice()
     .sort((a,b) => (STATUS_META[a.status]?.order??9) - (STATUS_META[b.status]?.order??9) || String(b.last_activity||"").localeCompare(String(a.last_activity||"")));
 
@@ -356,7 +386,10 @@ function render(){
     return `<div class="card ${stale?'stale':''}">
       <div class="card-top">
         <div><div class="cname">${c.client}</div><div class="chan">#${c.channel_name}</div></div>
-        <span class="pill s-${c.status}">${STATUS_META[c.status]?.label || c.status}</span>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end">
+          <span class="pill s-${c.status}">${STATUS_META[c.status]?.label || c.status}</span>
+          <span class="csrpill csr-${csrOf(c)==='Diana'?'diana':csrOf(c)==='Mavi'?'mavi':'none'}">CSR \u00b7 ${csrOf(c)}</span>
+        </div>
       </div>
       <div><div class="sec">Último acuerdo</div><div class="txt">${c.ultimo_acuerdo||"—"}</div></div>
       <div><div class="sec">Hecho</div>${bullets(c.hecho,"done")}</div>
@@ -369,6 +402,7 @@ function render(){
   }).join("");
 }
 function setFilter(f){ filter=f; render(); }
+function setCsrFilter(f){ csrFilter=f; render(); }
 render();
 </script>
 </body>
