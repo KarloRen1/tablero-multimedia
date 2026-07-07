@@ -60,6 +60,18 @@
   .a-arrancate { background:#e8c765; color:#1c1610; }
   .a-entregado { background:#7fd898; color:#0f2416; }
   .a-faltatop3 { background:#f2917e; color:#2a120d; }
+  .resumen { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-bottom:20px; }
+  .rbox { background:#221c17; border:1px solid #332a22; border-radius:14px; padding:14px 16px; }
+  .rbox .rlabel { font-family:"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#a08a6e; margin-bottom:8px; }
+  .rbox .rtxt { font-size:13px; line-height:1.55; color:#ded4c8; }
+  .rbox.ok { border-color:#2c4a35; }
+  .rbox.ok .rlabel { color:#7fd898; }
+  .rbox.stuck { border-color:#5a4a22; }
+  .rbox.stuck .rlabel { color:#e8c765; }
+  .rbox.live { border-color:#2a4258; }
+  .rbox.live .rlabel { color:#7fb8e8; }
+  .rnames { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .rname { font-family:"SF Mono",Menlo,monospace; font-size:10px; font-weight:700; padding:4px 9px; border-radius:999px; background:#2b241d; color:#c9bcae; white-space:nowrap; }
   #statusline { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; margin-bottom:14px; min-height:16px; }
 </style>
 </head>
@@ -72,6 +84,7 @@
   <button class="btn" onclick="document.getElementById('statusline').textContent='Esta copia es un snapshot. El tablero dentro de Claude (Cowork) se actualiza solo cada 20 min; pídele a Claude regenerar esta copia cuando quieras datos frescos.'">Cómo actualizar</button>
 </header>
 <div id="statusline"></div>
+<div class="resumen" id="resumen"></div>
 <div class="kpis" id="kpis"></div>
 <div class="filters" id="filters"></div>
 <div class="grid" id="grid"></div>
@@ -410,7 +423,32 @@ function bullets(arr, cls){
   return `<ul class="blist ${cls}">` + arr.map(x=>`<li>${x}</li>`).join("") + `</ul>`;
 }
 
+
+// Resumen ejecutivo. Calculado desde los datos, sobrevive a las actualizaciones automaticas de SNAPSHOT.
+function renderResumen(){
+  const cs = state.clients.filter(c => c.client !== "Video Editing (interno)");
+  const activas   = cs.filter(c => c.status==="en_produccion" || c.status==="aprobado");
+  const atorados  = cs.filter(c => c.status==="esperando_cliente" || c.status==="esperando_cambios");
+  const sinAct    = cs.filter(c => c.status==="sin_actividad");
+  const pct = Math.round(activas.length / cs.length * 100);
+  const veredicto = atorados.length <= activas.length
+    ? `Vamos bien: ${activas.length} de ${cs.length} clientes (${pct}%) con campaña activa o aprobada esta semana.`
+    : `Ojo: hay más clientes atorados (${atorados.length}) que campañas activas (${activas.length}).`;
+  const dtxt = c => { const d = daysAgo(c.last_activity); return d===null ? "sin fecha" : d+"d"; };
+  const names = arr => arr.length
+    ? `<div class="rnames">${arr.map(c=>`<span class="rname">${c.client} · ${dtxt(c)}</span>`).join("")}</div>`
+    : `<div class="rnames"><span class="rname">ninguno</span></div>`;
+  document.getElementById("resumen").innerHTML = `
+    <div class="rbox ok"><div class="rlabel">¿Vamos bien?</div>
+      <div class="rtxt">${veredicto} ${sinAct.length? sinAct.length+" sin actividad en 7 días.":""}</div></div>
+    <div class="rbox stuck"><div class="rlabel">Atorados · esperando al cliente</div>
+      <div class="rtxt">Bloqueados hasta que el cliente responda o apruebe:</div>${names(atorados)}</div>
+    <div class="rbox live"><div class="rlabel">Campañas pro activas</div>
+      <div class="rtxt">Ya en producción o con material aprobado:</div>${names(activas)}</div>`;
+}
+
 function render(){
+  renderResumen();
   const d = new Date(state.generated);
   document.getElementById("subline").textContent = state.clients.length + " clientes · snapshot del " + d.toLocaleString("es-MX",{dateStyle:"medium",timeStyle:"short"});
 
