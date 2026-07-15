@@ -70,6 +70,12 @@
   .rbox.stuck .rlabel { color:#e8c765; }
   .rbox.live { border-color:#2a4258; }
   .rbox.live .rlabel { color:#7fb8e8; }
+  .rbox.owe { border-color:#5a3325; }
+  .rbox.owe .rlabel { color:#f2917e; }
+  .rlist { list-style:none; margin-top:6px; }
+  .rlist li { font-size:12px; line-height:1.5; color:#ded4c8; padding-left:14px; position:relative; margin-bottom:6px; }
+  .rlist li::before { content:"·"; position:absolute; left:2px; color:#a08a6e; font-weight:700; }
+  .rlist b { color:#f0e8de; }
   .rnames { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
   .rname { font-family:"SF Mono",Menlo,monospace; font-size:10px; font-weight:700; padding:4px 9px; border-radius:999px; background:#2b241d; color:#c9bcae; white-space:nowrap; }
   #statusline { font-family:"SF Mono",Menlo,monospace; font-size:11px; color:#a89a8c; margin-bottom:14px; min-height:16px; }
@@ -91,7 +97,72 @@
 
 <script>
 const SNAPSHOT = {
-  "generated": "2026-07-15T19:07:33+00:00",
+  "generated": "2026-07-15T19:50:48+00:00",
+  "analisis": {
+    "veredicto": "9 de 17 clientes (53%) con material aprobado o campaña corriendo. Matiz importante: 4 de esas 9 cuentas aún esperan una entrega nuestra (Sylvia, Eddy, Angela y Maria, Franklin) y Kenny está en ronda de cambios — hoy el cuello de botella es más interno que del cliente. Solo Jeff, Elma y Katy bloquean de su lado; 3 cuentas sin actividad.",
+    "deuda_equipo": [
+      {
+        "n": "Kenny Raymond",
+        "t": "correcciones del 07-09 sin entregar (banner SOLD en 7400 SW 72nd Ct y video de Aventura que dice Miami Beach) + feedback interno de Oswaldo del 07-15 al video de 1040 Biscayne: quitar la primera imagen (alucinación de IA) y la mención de daily rentals"
+      },
+      {
+        "n": "Eddy Chavarria",
+        "t": "video final con ambos logos (opción 1 aprobada por Yao el 07-14), agregar mención de Las Casas Realty y quitar el '^2' del square footage"
+      },
+      {
+        "n": "Sylvia Castillo Massingill",
+        "t": "versión final con su voz clonada y el logo del nuevo brokerage; su audio está recibido desde el 07-08"
+      },
+      {
+        "n": "Angela y Maria",
+        "t": "versión final entregada hoy 07-15 con la voz que eligió Angela; falta arrancar la campaña"
+      },
+      {
+        "n": "Franklin Maldonado",
+        "t": "subir el video de colaboración que envió (prometido el 07-09)"
+      }
+    ],
+    "espera_cliente": [
+      {
+        "n": "Jeff McDonald",
+        "t": "APPROVED del video Harbor 26 y del PDF (pedidos 07-13 y 07-14, sin respuesta); Raiza reagendó la reunión al jueves 1 pm"
+      },
+      {
+        "n": "Elma Vidal",
+        "t": "16 días sin responder al archivo del 29-jun; la tarea de nuevos videos en ClickUp (Dugmary) vence mañana 16-jul y depende de esta respuesta"
+      },
+      {
+        "n": "Ailin Sidney",
+        "t": "debe los 3 videos de ranchos que quedó en grabar desde el 08-jul (call con Diana); el ad bilingüe sigue activo mientras tanto"
+      },
+      {
+        "n": "Katy Vilchez",
+        "t": "falta que elija su propiedad unicornio (guía enviada el 08-jul, 7 días sin respuesta)"
+      },
+      {
+        "n": "Olga Rios",
+        "t": "sin respuesta a la guía, pero es esperado: cuenta en pausa/nurture con ads apagadas por salud desde mayo (ClickUp)"
+      }
+    ],
+    "alertas": [
+      {
+        "n": "Luz Gachupin",
+        "t": "marcada '9. churn risk' en ClickUp (actualizado hoy 07-15) y sin actividad multimedia en 7 días — atender antes de que escale"
+      },
+      {
+        "n": "Vivian Pascual",
+        "t": "no está inactiva: 5 variaciones del creativo corren desde el 07-07 (call en Grain) con revisión el 21-jul 9 am; pero 'Propuestas de videos' en ClickUp lleva ~5 semanas sin avance"
+      },
+      {
+        "n": "Kenny Raymond",
+        "t": "su tarea urgente en ClickUp está vencida desde el 22-may (~54 días); todo el trabajo real vive solo en Slack"
+      },
+      {
+        "n": "ClickUp",
+        "t": "no hay pipeline de producción de video: 9 de 17 clientes no tienen ninguna tarea multimedia rastreable (el trabajo se coordina solo por Slack)"
+      }
+    ]
+  },
   "clients": [
     {
       "client": "Sylvia Castillo Massingill",
@@ -115,28 +186,31 @@ const SNAPSHOT = {
       "channel_name": "ailin-sidney-support-channel",
       "last_activity": "2026-07-08",
       "status": "aprobado",
-      "ultimo_acuerdo": "El 2026-07-08 Karlo confirmó en el canal el status de los videos para la campaña como 'Aprobado'. Sin más actividad multimedia después de esa fecha (el resto de la semana fue capacitación de CRM/leads).",
+      "ultimo_acuerdo": "El 2026-07-08 Karlo confirmó los videos de la campaña como 'Aprobado'. En la call del 2026-07-07 (Grain) Ailin quedó en grabar y enviar 3 videos de propiedades (ranchos) para reemplazar el ad actual; el video bilingüe de Carlos se mantiene activo hasta tener los nuevos.",
       "hecho": [
-        "Videos de la campaña confirmados como aprobados (2026-07-08)"
+        "Videos de la campaña confirmados como aprobados (2026-07-08)",
+        "Video de Carlos activo en campaña con versiones en inglés y español (confirmado en call del 2026-07-07)"
       ],
-      "pendiente": []
+      "pendiente": [
+        "Recibir los 3 videos de ranchos que Ailin quedó en grabar desde el 2026-07-08; la edición tomará ~1 semana en cola una vez recibidos",
+        "Confirmar con Carlos si los nuevos videos llevan versiones EN/ES"
+      ]
     },
     {
       "client": "Angela y Maria",
       "channel_name": "angela-y-maria-support-channel",
-      "last_activity": "2026-07-09",
-      "status": "esperando_cliente",
-      "ultimo_acuerdo": "El 2026-07-09 Karlo avisó que está lista la nueva versión de los videos con los cambios sugeridos (guión corregido, imágenes de la casa con anexo, textos) y pidió confirmación de 'APROBADO'; Maria respondió con un adjunto pero no consta aprobación explícita.",
+      "last_activity": "2026-07-15",
+      "status": "aprobado",
+      "ultimo_acuerdo": "El 2026-07-13 Angela envió el audio de referencia para la voz y Karlo confirmó 'De acuerdo, uso esa voz'. Hoy 2026-07-15 Karlo entregó la versión final montada con esa voz: 'con esto cerramos la ronda de cambios y arrancamos'.",
       "hecho": [
         "PDF con guión corregido entregado el 2026-07-07: enganche 3.5%-5%, préstamos FHA y convencionales, distancia real a Disney desde Minneola, retiro del gancho de inversionistas",
         "Guión final consolidado el 2026-07-08 incorporando la versión editada por Angela (hooks variables, ubicación West Orlando, suite independiente, financiamiento, CTA del modelo probado)",
-        "Acordado el 2026-07-08 rehacer todos los videos para hacer match con la referencia visual de la campaña activa (imágenes panorámicas, textos al medio/arriba, casa con anexo correcta)",
-        "Nueva versión de los videos con los cambios sugeridos entregada el 2026-07-09"
+        "Nueva versión de los videos con los cambios sugeridos entregada el 2026-07-09",
+        "Ronda de cambios de voz resuelta: Angela envió el audio de referencia definitivo el 2026-07-13 y Karlo confirmó su uso",
+        "Versión final del video montada con la voz elegida, entregada el 2026-07-15"
       ],
       "pendiente": [
-        "Aprobación de Angela y Maria sobre la nueva versión de los videos (guión e imágenes)",
-        "Audio grabado por las clientas leyendo el guión aprobado y los hooks para la clonación de voz (Maria envió un adjunto el 2026-07-09 sin confirmación en el canal)",
-        "Confirmación de la voz IA a usar (Dugmary quedó en consultar qué voz se usó en el video de la campaña activa)"
+        "Arrancar la campaña con la versión final entregada el 2026-07-15"
       ]
     },
     {
@@ -144,7 +218,7 @@ const SNAPSHOT = {
       "channel_name": "eddy-chavarria-support-channel",
       "last_activity": "2026-07-14",
       "status": "aprobado",
-      "ultimo_acuerdo": "El 2026-07-14 Yao eligió la opción 1 de colocación de logos (Eddy + Las Casas Realty como sello al final del video) y Karlo confirmó 'APPROVED you can move forward'. El tono de voz más 'upbeat' no es posible por ahora con la IA.",
+      "ultimo_acuerdo": "El 2026-07-14 Yao eligió la opción 1 de colocación de logos (Eddy + Las Casas Realty como sello al final del video) y Karlo confirmó 'APPROVED you can move forward'. Al 2026-07-15 el video final aún no aparece entregado en el canal.",
       "hecho": [
         "Preview del video de campaña para 3032 Johnston St (Lincoln Heights, NE LA) con los 5 hooks a testear, compartido el 2026-07-10",
         "Recibidos los logos de Eddy y Las Casas Realty en PNG (2026-07-14)",
@@ -162,14 +236,15 @@ const SNAPSHOT = {
       "channel_name": "elma-vidal-support-channel",
       "last_activity": "2026-07-13",
       "status": "esperando_cliente",
-      "ultimo_acuerdo": "El 2026-07-13 Karlo hizo seguimiento preguntando si Elma revisó el archivo compartido el lunes 29 de junio; sigue esperando su respuesta para proceder a la creación de los videos para ads.",
+      "ultimo_acuerdo": "El 2026-07-13 Karlo hizo seguimiento preguntando si Elma revisó el archivo compartido el lunes 29 de junio; al 2026-07-15 sigue sin responder (16 días de silencio desde el envío original).",
       "hecho": [
         "Archivo base para los videos de ads compartido el 29 de junio (previo a la ventana de 7 días)",
         "Seguimiento enviado a Elma el 2026-07-13 recordando la revisión pendiente"
       ],
       "pendiente": [
         "Respuesta/visto bueno de Elma al archivo compartido el 29 de junio",
-        "Iniciar la creación de los videos para ads una vez recibida su aprobación"
+        "Iniciar la creación de los videos para ads una vez recibida su aprobación",
+        "Ojo: la tarea 'Se le van a hacer nuevos videos' en ClickUp (Dugmary) vence el 16-jul y depende de esta respuesta"
       ]
     },
     {
@@ -177,7 +252,7 @@ const SNAPSHOT = {
       "channel_name": "fatima-esquetini-support-channel",
       "last_activity": null,
       "status": "sin_actividad",
-      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días",
+      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días. En ClickUp la cuenta figura como '2. launch ready'.",
       "hecho": [],
       "pendiente": []
     },
@@ -192,7 +267,7 @@ const SNAPSHOT = {
         "Nueva campaña con los videos nuevos lanzada y corriendo desde el 2026-07-09"
       ],
       "pendiente": [
-        "Subir el video de colaboración que Franklin envió (el equipo dijo el 2026-07-09 que lo subiría 'dentro de poco')"
+        "Subir el video de colaboración que Franklin envió (el equipo dijo el 2026-07-09 que lo subiría 'dentro de poco'; al 07-15 no consta entregado)"
       ]
     },
     {
@@ -200,15 +275,16 @@ const SNAPSHOT = {
       "channel_name": "jeff-mcdonald-support-channel",
       "last_activity": "2026-07-14",
       "status": "esperando_cliente",
-      "ultimo_acuerdo": "El 2026-07-13 Karlo envió el preview del video de campaña del hero listing Harbor 26 (Lake Union, Eastlake) con 5 hooks a testear. El 2026-07-14 Karlo pidió a Raiza confirmar el APPROVED del video, sin confirmación registrada en el canal.",
+      "ultimo_acuerdo": "El 2026-07-13 Karlo envió el preview del video de Harbor 26 (Lake Union, Eastlake) con 5 hooks a testear y el 2026-07-14 pidió a Raiza confirmar el APPROVED, sin respuesta. Lo único de Raiza fue reagendar la reunión al jueves 1 pm.",
       "hecho": [
         "Preview del video de campaña de Harbor 26 (townhomes en Lake Union, Eastlake) enviado el 2026-07-13",
         "Definidos los 5 hooks/aperturas que se testearán con el mismo video para quedarse con el ganador",
         "PDF enviado por Karlo previamente; Diana pidió confirmación de aprobación el 2026-07-13"
       ],
       "pendiente": [
-        "Confirmación de APPROVED del video por parte de Jeff/Raiza (pedida el 2026-07-14, sin respuesta en el canal)",
-        "Confirmación de aprobación del PDF que envió Karlo (pedida el 2026-07-13, sin respuesta en el canal)"
+        "Confirmación de APPROVED del video por parte de Jeff/Raiza (pedida el 2026-07-14, sin respuesta)",
+        "Confirmación de aprobación del PDF que envió Karlo (pedida el 2026-07-13, sin respuesta)",
+        "Confirmar la reunión reagendada del jueves 1 pm con Raiza"
       ]
     },
     {
@@ -216,7 +292,7 @@ const SNAPSHOT = {
       "channel_name": "karin-silva-support-channel",
       "last_activity": null,
       "status": "sin_actividad",
-      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días",
+      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días. En ClickUp solo está activo el RE-SIGN de renovación (actualizado 2026-07-15); cuenta en pausa.",
       "hecho": [],
       "pendiente": []
     },
@@ -238,7 +314,7 @@ const SNAPSHOT = {
       "channel_name": "kenny-raymond-support-channel",
       "last_activity": "2026-07-15",
       "status": "esperando_cambios",
-      "ultimo_acuerdo": "El 2026-07-14 Karlo envió el preview de campaña del hero listing 1040 Biscayne Blvd #1001 (Ten Museum Park) con 5 hooks a testear. Siguen abiertos los cambios que Kenny pidió el 2026-07-09 (banner SOLD en 7400 SW 72nd Ct y corrección del video de Aventura que menciona Miami Beach); el 2026-07-15 Oswaldo compartió el doc de instrucciones de generación de video AI.",
+      "ultimo_acuerdo": "El 2026-07-15 Oswaldo (interno, en thread del preview) marcó el video de 1040 Biscayne como 'approved BUT': quitar la primera imagen (edificios en el agua, alucinación de IA) y la mención de daily rentals. Siguen sin entregarse las correcciones que Kenny pidió el 2026-07-09. Hubo Zoom con Kenny el 07-15 con problemas técnicos de audio.",
       "hecho": [
         "Videos producidos para 1040 Biscayne Blvd #1001 y 7400 SW 72nd Ct (enviados a revisión el 2026-07-09)",
         "Preview de campaña de 1040 Biscayne Blvd #1001 con los 5 hooks a testear enviado el 2026-07-14",
@@ -246,9 +322,10 @@ const SNAPSHOT = {
         "Recibidos materiales del cliente: renderings/floorplans/pricing de The Well (2026-07-09) y Dropbox del nuevo proyecto en Coral Gables (2026-07-14)"
       ],
       "pendiente": [
-        "Corregir el video de 7400 SW 72nd Ct: Kenny pidió que lleve 'SOLD' bien visible (2026-07-09)",
-        "Corregir el video AI de Aventura: el guion habla de Miami Beach pero las tomas de dron son de Aventura (2026-07-09)",
-        "Recibir del cliente el video de Aventura para revisión del equipo creativo (pedido por Diana el 2026-07-13, no consta envío)",
+        "Corregir el video de 7400 SW 72nd Ct: Kenny pidió 'SOLD' bien visible (2026-07-09, sin entregar)",
+        "Corregir el video AI de Aventura: el guion habla de Miami Beach pero las tomas son de Aventura (2026-07-09, sin entregar)",
+        "Ajustar el video de 1040 Biscayne según Oswaldo (2026-07-15): quitar primera imagen alucinada por IA y la mención de daily rentals",
+        "Recibir del cliente el video de Aventura para revisión (Diana se lo volvió a pedir el 2026-07-13, no consta envío)",
         "Producir contenido del nuevo proyecto en Coral Gables con el material del Dropbox recibido el 2026-07-14"
       ]
     },
@@ -257,7 +334,7 @@ const SNAPSHOT = {
       "channel_name": "luz-gachupin-support-channel",
       "last_activity": null,
       "status": "sin_actividad",
-      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días",
+      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días. Alerta: en ClickUp la cuenta está marcada como '9. churn risk' (actualizado 2026-07-15).",
       "hecho": [],
       "pendiente": []
     },
@@ -286,12 +363,12 @@ const SNAPSHOT = {
       "channel_name": "olga-rios-support-channel",
       "last_activity": "2026-07-08",
       "status": "esperando_cliente",
-      "ultimo_acuerdo": "El 2026-07-08 Karlo le compartió a Olga una guía para seleccionar una 'propiedad unicornio' (insumo para el contenido de video). Olga no ha respondido en el canal desde entonces.",
+      "ultimo_acuerdo": "El 2026-07-08 Karlo le compartió a Olga la guía de 'propiedad unicornio'. No ha respondido, pero es esperado: en ClickUp la cuenta está en 'pause :: nurture' con ads apagadas por temas de salud desde mayo.",
       "hecho": [
         "Guía enviada a la cliente sobre cómo seleccionar una 'propiedad unicornio' (2026-07-08)"
       ],
       "pendiente": [
-        "Que Olga revise la guía y seleccione/comparta su propiedad unicornio para el contenido"
+        "Que Olga revise la guía y seleccione/comparta su propiedad unicornio cuando reactive la cuenta"
       ]
     },
     {
@@ -323,11 +400,17 @@ const SNAPSHOT = {
     {
       "client": "Vivian Pascual",
       "channel_name": "vivian-pascual-support-channel",
-      "last_activity": null,
-      "status": "sin_actividad",
-      "ultimo_acuerdo": "Sin actividad multimedia en los últimos 7 días",
-      "hecho": [],
-      "pendiente": []
+      "last_activity": "2026-07-07",
+      "status": "aprobado",
+      "ultimo_acuerdo": "En la call del 2026-07-07 (Grain) se confirmó que las 5 variaciones del mismo creativo están activas desde ese día (mismo video, distinto copy; test Leadform con SMS vs ManyChat). Vivian aceptó monitorear la estrategia de 'propiedad unicornio'. Próxima revisión de métricas: 21 de julio, 9:00 AM. Sin conversación multimedia en Slack esta semana.",
+      "hecho": [
+        "5 variaciones del creativo activas desde el 2026-07-07 (mismo video, distinto copy)",
+        "Links de los ads activos y sus copys disponibles en los Bookmarks del canal de Slack ('Links for Ads')"
+      ],
+      "pendiente": [
+        "Revisión de métricas de las 5 variaciones el 21 de julio, 9:00 AM",
+        "Retomar 'Propuestas de videos' en ClickUp (Oz, prioridad high): lleva ~5 semanas sin avance y sin due date"
+      ]
     }
   ]
 };
@@ -406,24 +489,42 @@ function bullets(arr, cls){
 }
 
 
-// Resumen ejecutivo. Calculado desde los datos, sobrevive a las actualizaciones automaticas de SNAPSHOT.
+// Resumen ejecutivo. Usa SNAPSHOT.analisis (curado cruzando Slack + ClickUp + Grain) si existe;
+// si una actualizacion automatica no lo trae, cae al calculo automatico desde los datos.
 function renderResumen(){
+  const el = document.getElementById("resumen");
+  const A = state.analisis;
+  const item = x => `<li><b>${x.n}</b> — ${x.t}</li>`;
+  const ul = arr => arr && arr.length ? `<ul class="rlist">${arr.map(item).join("")}</ul>` : `<div class="rtxt">nada pendiente</div>`;
+  if(A){
+    el.innerHTML = `
+      <div class="rbox ok"><div class="rlabel">¿Vamos bien?</div><div class="rtxt">${A.veredicto}</div></div>
+      <div class="rbox owe"><div class="rlabel">El equipo debe entregar</div>${ul(A.deuda_equipo)}</div>
+      <div class="rbox stuck"><div class="rlabel">La pelota está en el cliente</div>${ul(A.espera_cliente)}</div>
+      <div class="rbox live"><div class="rlabel">Alertas · ClickUp + Grain</div>${ul(A.alertas)}</div>`;
+    return;
+  }
+  // Fallback computado (cuando el SNAPSHOT no trae "analisis")
   const cs = state.clients.filter(c => c.client !== "Video Editing (interno)");
-  const activas   = cs.filter(c => c.status==="en_produccion" || c.status==="aprobado");
-  const atorados  = cs.filter(c => c.status==="esperando_cliente" || c.status==="esperando_cambios");
-  const sinAct    = cs.filter(c => c.status==="sin_actividad");
+  const activas  = cs.filter(c => c.status==="en_produccion" || c.status==="aprobado");
+  const deuda    = cs.filter(c => (c.status==="aprobado" || c.status==="en_produccion" || c.status==="esperando_cambios") && c.pendiente && c.pendiente.length);
+  const atorados = cs.filter(c => c.status==="esperando_cliente");
+  const sinAct   = cs.filter(c => c.status==="sin_actividad");
   const pct = Math.round(activas.length / cs.length * 100);
-  const veredicto = atorados.length <= activas.length
-    ? `Vamos bien: ${activas.length} de ${cs.length} clientes (${pct}%) con campaña activa o aprobada esta semana.`
-    : `Ojo: hay más clientes atorados (${atorados.length}) que campañas activas (${activas.length}).`;
-  const dtxt = c => { const d = daysAgo(c.last_activity); return d===null ? "sin fecha" : d+"d"; };
+  const veredicto = `${activas.length} de ${cs.length} clientes (${pct}%) con material aprobado o campaña corriendo`
+    + (deuda.length ? `, pero ${deuda.length} de esas cuentas aún esperan una entrega del equipo` : "")
+    + `. ${atorados.length} esperando al cliente` + (sinAct.length ? ` y ${sinAct.length} sin actividad en 7 días.` : ".");
+  const dtxt = c => { const d = daysAgo(c.last_activity); return d===null ? "sin fecha" : (d===0 ? "hoy" : d+"d"); };
   const names = arr => arr.length
     ? `<div class="rnames">${arr.map(c=>`<span class="rname">${c.client} · ${dtxt(c)}</span>`).join("")}</div>`
     : `<div class="rnames"><span class="rname">ninguno</span></div>`;
-  document.getElementById("resumen").innerHTML = `
-    <div class="rbox ok"><div class="rlabel">¿Vamos bien?</div>
-      <div class="rtxt">${veredicto} ${sinAct.length? sinAct.length+" sin actividad en 7 días.":""}</div></div>
-    <div class="rbox stuck"><div class="rlabel">Atorados · esperando al cliente</div>
+  const firstPend = arr => arr.length
+    ? `<ul class="rlist">${arr.map(c=>`<li><b>${c.client}</b> — ${(c.pendiente&&c.pendiente[0])||""}</li>`).join("")}</ul>`
+    : `<div class="rtxt">nada pendiente</div>`;
+  el.innerHTML = `
+    <div class="rbox ok"><div class="rlabel">¿Vamos bien?</div><div class="rtxt">${veredicto}</div></div>
+    <div class="rbox owe"><div class="rlabel">El equipo debe entregar</div>${firstPend(deuda)}</div>
+    <div class="rbox stuck"><div class="rlabel">La pelota está en el cliente</div>
       <div class="rtxt">Bloqueados hasta que el cliente responda o apruebe:</div>${names(atorados)}</div>
     <div class="rbox live"><div class="rlabel">Campañas pro activas</div>
       <div class="rtxt">Ya en producción o con material aprobado:</div>${names(activas)}</div>`;
